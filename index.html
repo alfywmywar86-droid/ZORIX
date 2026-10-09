@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZORIX - المساعد الذكي</title>
+<style>
+body{margin:0;font-family:sans-serif;background:#0a0e13;color:white}
+.header{text-align:center;padding:20px;background:#151a21}
+.header h1{color:#00ff88;margin:0}
+.chat{max-width:500px;margin:20px auto;padding:15px}
+.msg{background:#151a21;padding:12px 15px;border-radius:15px;margin:10px 0;line-height:1.5}
+.user{background:#00ff88;color:#000;margin-right:30px}
+.bot{background:#1f2937;color:#fff;margin-left:30px;border:1px solid #00ff8820}
+.input-box{position:fixed;bottom:0;left:0;right:0;background:#151a21;padding:15px;display:flex;gap:10px;max-width:500px;margin:auto}
+input{flex:1;padding:12px;border-radius:10px;border:none;background:#0a0e13;color:white;outline:none}
+button{background:#00ff88;border:none;padding:12px 20px;border-radius:10px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>ZORIX AI</h1>
+<p>مساعدك الذكي للتداول</p>
+</div>
+<div class="chat" id="chat">
+<div class="msg bot">أهلا بيك! 👋 أنا مساعد ZORIX الذكي. اسألني عن أي حاجة في التداول، الاسعار، أو نصايح للمبتدئين.</div>
+</div>
+<div class="input-box">
+<input id="q" placeholder="اسأل المساعد... مثلا: اشتري بيتكوين؟" onkeypress="if(event.key==='Enter')ask()">
+<button onclick="ask()">إرسال</button>
+</div>
+<script>
+function ask(){
+let input=document.getElementById('q');
+let text=input.value.trim();
+if(!text) return;
+let chat=document.getElementById('chat');
+chat.innerHTML+=`<div class="msg user">${text}</div>`;
+input.value='';
+let reply="سؤال ممتاز! 👌 ";
+if(text.includes("بيتكوين")||text.includes("BTC")) reply+="البيتكوين حاليا متقلب، انصحك تراقب مستوى 65 الف، لو كسره لفوق اشتري، لو نزل تحته استنى.";
+else if(text.includes("اشتري")||text.includes("ابيع")) reply+="القاعدة الذهبية: لا تشتري وانت خايف ولا تبيع وانت طماع. حدد هدف ووقف خسارة قبل ما تدخل.";
+else if(text.includes("مبتدئ")||text.includes("اتعلم")) reply+="ابدأ بمبلغ صغير جدا، اتعلم التحليل الفني الاساسي، وتابع اخبار السوق يوميا. ZORIX هيساعدك خطوة بخطوة.";
+else if(text.includes("سلام")||text.includes("اهلا")) reply+="اهلا بيك يا بطل! جاهز اساعدك تكسب؟ اسألني عن اي عملة.";
+else reply+="فكرة ذكية! في التداول الناجح لازم تدرس 3 حاجات: 1- اتجاه السوق 2- ادارة راس المال 3- التحكم في مشاعرك. تحب اشرحلك واحدة منهم؟";
+
+setTimeout(()=>{chat.innerHTML+=`<div class="msg bot">${reply}</div>`;window.scrollTo(0,document.body.scrollHeight)},600);
+}
+</script>
+</body>
+</html>
